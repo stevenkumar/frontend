@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 BookHaven - Your Online Bookstore</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-book-open"></i>
+                BookHaven
+            </a>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search books, authors...">
+                <button onclick="searchBooks()"><i class="fas fa-search"></i></button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#bestsellers">Bestsellers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#" onclick="toggleWishlist()"><i class="fas fa-heart"></i><span class="wishlist-count">0</span></a>
+                <a href="#" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+                <a href="#" onclick="toggleProfile()"><i class="fas fa-user"></i></a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Discover Your Next <span>Great Read</span></h1>
+            <p>Explore thousands of books from bestselling authors. Find your perfect book today!</p>
+            <div class="hero-buttons">
+                <a href="#featured" class="btn btn-primary">Explore Books</a>
+                <a href="#categories" class="btn btn-secondary">Browse Categories</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>50K+</h3>
+                    <p>Books</p>
+                </div>
+                <div class="stat">
+                    <h3>10K+</h3>
+                    <p>Authors</p>
+                </div>
+                <div class="stat">
+                    <h3>100K+</h3>
+                    <p>Happy Readers</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-books">
+                <div class="book-float book1">📕</div>
+                <div class="book-float book2">📗</div>
+                <div class="book-float book3">📘</div>
+                <div class="book-float book4">📙</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <h2 class="section-title">Browse Categories</h2>
+        <div class="categories-grid">
+            <div class="category-card" onclick="filterByCategory('fiction')">
+                <div class="category-icon">📖</div>
+                <h3>Fiction</h3>
+                <p>1,200+ Books</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('non-fiction')">
+                <div class="category-icon">📚</div>
+                <h3>Non-Fiction</h3>
+                <p>800+ Books</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('mystery')">
+                <div class="category-icon">🔍</div>
+                <h3>Mystery</h3>
+                <p>500+ Books</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('romance')">
+                <div class="category-icon">💕</div>
+                <h3>Romance</h3>
+                <p>900+ Books</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('sci-fi')">
+                <div class="category-icon">🚀</div>
+                <h3>Sci-Fi</h3>
+                <p>600+ Books</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('self-help')">
+                <div class="category-icon">🧠</div>
+                <h3>Self-Help</h3>
+                <p>400+ Books</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('biography')">
+                <div class="category-icon">👤</div>
+                <h3>Biography</h3>
+                <p>300+ Books</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('children')">
+                <div class="category-icon">🧒</div>
+                <h3>Children</h3>
+                <p>700+ Books</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section id="featured" class="featured">
+        <h2 class="section-title">Featured Books</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterBooks('all')">All</button>
+            <button class="filter-btn" onclick="filterBooks('fiction')">Fiction</button>
+            <button class="filter-btn" onclick="filterBooks('non-fiction')">Non-Fiction</button>
+            <button class="filter-btn" onclick="filterBooks('mystery')">Mystery</button>
+            <button class="filter-btn" onclick="filterBooks('romance')">Romance</button>
+        </div>
+        <div class="books-grid" id="booksGrid">
+            <!-- Books will be loaded by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Bestsellers -->
+    <section id="bestsellers" class="bestsellers">
+        <h2 class="section-title">Bestsellers This Week</h2>
+        <div class="bestseller-slider" id="bestsellerSlider">
+            <!-- Bestsellers will be loaded by JavaScript -->
+        </div>
+        <div class="slider-controls">
+            <button onclick="slideBestsellers(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="slideBestsellers(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Special Offer -->
+    <section class="special-offer">
+        <div class="offer-content">
+            <h2>📢 Special Offer!</h2>
+            <h3>Get 30% OFF on your first order</h3>
+            <p>Use code: <span class="code">BOOKLOVER30</span></p>
+            <div class="countdown" id="countdown">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
+                </div>
+            </div>
+            <a href="#featured" class="btn btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Readers Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Amazing collection of books! Fast delivery and great packaging. Highly recommended!"</p>
+                <div class="author">
+                    <div class="avatar">👩</div>
+                    <div>
+                        <h4>Priya Sharma</h4>
+                        <span>Delhi</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Best online bookstore I've found. The prices are great and customer service is excellent!"</p>
+                <div class="author">
+                    <div class="avatar">👨</div>
+                    <div>
+                        <h4>Rahul Verma</h4>
+                        <span>Mumbai</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Love the variety of books available. Found many rare titles that I couldn't find elsewhere!"</p>
+                <div class="author">
+                    <div class="avatar">👩</div>
+                    <div>
+                        <h4>Anjali Patel</h4>
+                        <span>Bangalore</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get updates on new arrivals, special offers, and reading recommendations!</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>123 Book Street, Reading Lane<br>Mumbai, India - 400084</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+91 8898741009</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>vkvseri@gmail.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Working Hours</h4>
+                        <p>Mon - Sat: 9:00 AM - 8:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="submitContact(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-book-open"></i> BookHaven</h3>
+                <p>Your trusted online bookstore since 2020. We bring the best books to your doorstep.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#bestsellers">Bestsellers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#fiction">Fiction</a></li>
+                    <li><a href="#non-fiction">Non-Fiction</a></li>
+                    <li><a href="#mystery">Mystery</a></li>
+                    <li><a href="#romance">Romance</a></li>
+                    <li><a href="#self-help">Self-Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BookHaven. All rights reserved. Made with ❤️ for Book Lovers</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Book Details Modal -->
+    <div class="modal" id="bookModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-body" id="modalBody">
+                <!-- Book details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Item added to cart!</span>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+    <script src="script/index.js"></script>
+</body>
+</html>
