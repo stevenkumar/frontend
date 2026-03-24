@@ -1,13 +1,14 @@
 {
-  "name": "frontend",
+  "name": "bookhaven-frontend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "BookHaven Frontend - Online Bookstore",
   "scripts": {
-    "start": "index.html"
+    "start": "npx live-server --port=3000 --no-browser"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
 }

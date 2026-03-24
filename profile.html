@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - BookHaven</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --profile-gradient: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            min-height: 100vh;
+        }
+
+        .profile-container {
+            padding: 120px 20px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background elements */
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: var(--profile-gradient);
+            filter: blur(80px);
+            opacity: 0.1;
+            z-index: 0;
+            border-radius: 50%;
+        }
+        .blob-1 { top: -100px; left: -100px; }
+        .blob-2 { bottom: -100px; right: -100px; animation: float 10s infinite alternate; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .profile-card {
+            width: 100%;
+            max-width: 900px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 850px) {
+            .profile-card { grid-template-columns: 1fr; }
+        }
+
+        .profile-sidebar {
+            background: var(--profile-gradient);
+            padding: 60px 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-sidebar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .profile-img-wrapper {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            margin-bottom: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: white;
+            color: var(--primary-color);
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: white;
+            color: var(--primary-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 2;
+        }
+
+        .camera-icon:hover {
+            transform: scale(1.1);
+            background: var(--light-color);
+        }
+
+        .profile-sidebar h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .profile-sidebar p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-nav {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .nav-item {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: left;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .profile-main {
+            padding: 60px;
+            background: white;
+        }
+
+        .form-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 2px solid #f1f5f9;
+            background: #f8fafc;
+            font-size: 1rem;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+        }
+
+        .actions-bar {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .save-btn {
+            flex: 2;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .logout-btn {
+            flex: 1;
+            background: #fee2e2;
+            color: #ef4444;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            background: #fecaca;
+            color: #dc2626;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--dark-color);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 15px;
+            transform: translateX(150%);
+            transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-weight: 500;
+        }
+        #toast.active { transform: translateX(0); }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-open"></i> BookHaven
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#featured">Books</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+
+        <div class="profile-card">
+            <div class="profile-sidebar">
+                <div class="profile-img-wrapper" id="profileImagePreview">
+                    <div class="profile-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <label for="profileImgInput" class="camera-icon">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" id="profileImgInput" accept="image/*" style="display: none;">
+                
+                <h2 id="display-name">Loading...</h2>
+                <p id="display-email">Loading...</p>
+
+                <div class="sidebar-nav">
+                    <div class="nav-item active">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Edit Profile</span>
+                    </div>
+                    <div class="nav-item" onclick="window.location.href='index.html#featured'">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>My Orders</span>
+                    </div>
+                    <div class="nav-item" onclick="window.location.href='index.html#contact'">
+                        <i class="fas fa-headset"></i>
+                        <span>Support</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-main">
+                <div class="loading-overlay" id="loading-overlay">
+                    <i class="fas fa-spinner fa-spin fa-2x" style="color: var(--primary-color);"></i>
+                </div>
+
+                <h3 class="form-section-title">
+                    <i class="fas fa-id-card" style="color: var(--primary-color);"></i>
+                    Profile Information
+                </h3>
+
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label>Display Name</label>
+                        <input type="text" id="input-name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="input-email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="actions-bar">
+                        <button type="submit" class="btn btn-primary save-btn" id="save-btn">
+                            Save Changes
+                        </button>
+                        <button type="button" class="logout-btn" onclick="handleLogout()">
+                            <i class="fas fa-power-off"></i>
+                            Logout
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>

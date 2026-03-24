@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookHaven - Sign In / Sign Up</title>
+  <meta name="description" content="Sign in or create an account to access BookHaven, your online bookstore.">
+  <link rel="stylesheet" href="css/auth.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="auth-container">
+
+    <!-- Logo -->
+    <div class="auth-logo">
+      <a href="index.html">
+        <i class="fas fa-book-open"></i>
+        BookHaven
+      </a>
+    </div>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">Sign In</button>
+        <button id="tab-register" class="tab-btn" onclick="switchTab('register')">Sign Up</button>
+      </div>
+
+      <!-- ===== LOGIN FORM ===== -->
+      <div id="form-login" class="auth-form active">
+        <h2 class="form-title">Welcome back 👋</h2>
+        <p class="form-subtitle">Sign in to continue to BookHaven</p>
+
+        <div id="login-success" class="alert alert-success">
+          <i class="fas fa-check-circle"></i>
+          <span></span>
+        </div>
+        <div id="login-error" class="alert alert-error">
+          <i class="fas fa-exclamation-circle"></i>
+          <span></span>
+        </div>
+
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <input id="login-email" type="email" placeholder="Email address" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input id="login-password" type="password" placeholder="Password" required autocomplete="current-password">
+            <i class="pwd-toggle fas fa-eye" onclick="togglePassword('login-password')"></i>
+          </div>
+          <button type="submit" id="login-btn" class="btn-auth">Sign In</button>
+        </form>
+
+        <div class="switch-text">
+          Don't have an account? <a href="#" onclick="switchTab('register')">Sign up free</a>
+        </div>
+      </div>
+
+      <!-- ===== REGISTER FORM ===== -->
+      <div id="form-register" class="auth-form">
+        <h2 class="form-title">Create account 🚀</h2>
+        <p class="form-subtitle">Join thousands of book lovers today</p>
+
+        <div id="register-success" class="alert alert-success">
+          <i class="fas fa-check-circle"></i>
+          <span></span>
+        </div>
+        <div id="register-error" class="alert alert-error">
+          <i class="fas fa-exclamation-circle"></i>
+          <span></span>
+        </div>
+
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <i class="fas fa-user"></i>
+            <input id="reg-name" type="text" placeholder="Full name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <input id="reg-email" type="email" placeholder="Email address" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input id="reg-password" type="password" placeholder="Password (min 6 chars)" required autocomplete="new-password">
+            <i class="pwd-toggle fas fa-eye" onclick="togglePassword('reg-password')"></i>
+          </div>
+          <div class="form-group">
+            <i class="fas fa-shield-alt"></i>
+            <input id="reg-confirm" type="password" placeholder="Confirm password" required autocomplete="new-password">
+          </div>
+          <button type="submit" id="register-btn" class="btn-auth">Create Account</button>
+        </form>
+
+        <div class="switch-text">
+          Already have an account? <a href="#" onclick="switchTab('login')">Sign in</a>
+        </div>
+      </div>
+
+    </div><!-- /auth-card -->
+
+    <div class="back-link">
+      <a href="index.html"><i class="fas fa-arrow-left"></i> Back to BookHaven</a>
+    </div>
+
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

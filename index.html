@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📚 BookHaven - Your Online Bookstore</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -27,9 +27,15 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="#" onclick="toggleWishlist()"><i class="fas fa-heart"></i><span class="wishlist-count">0</span></a>
+                <a href="wishlist.html" title="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count" id="wishlist-count">0</span>
+                </a>
                 <a href="#" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
-                <a href="#" onclick="toggleProfile()"><i class="fas fa-user"></i></a>
+                <a href="auth.html" id="auth-btn" onclick="handleAuthClick(event)">
+                    <i class="fas fa-user"></i>
+                    <span id="auth-label">Sign In</span>
+                </a>
             </div>
             <div class="hamburger" onclick="toggleMenu()">
                 <span></span>
@@ -263,18 +269,18 @@
             </div>
             <form class="contact-form" onsubmit="submitContact(event)">
                 <div class="form-group">
-                    <input type="text" placeholder="Your Name" required>
+                    <input type="text" id="contact-name" placeholder="Your Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" placeholder="Your Email" required>
+                    <input type="email" id="contact-email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="Subject" required>
+                    <input type="tel" id="contact-phone" placeholder="Your Phone Number" required>
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <textarea id="contact-message" placeholder="Your Message" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
+                <button type="submit" id="contact-submit" class="btn btn-primary">Send Message</button>
             </form>
         </div>
     </section>
@@ -365,6 +371,6 @@
     <!-- Overlay -->
     <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
-    <script src="script/index.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

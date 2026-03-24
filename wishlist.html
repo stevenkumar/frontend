@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - BookHaven</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .wishlist-section {
+            padding: 120px 5% 60px;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+        .wishlist-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .wishlist-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .wishlist-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        .wishlist-header p {
+            color: var(--text-light);
+        }
+        .empty-wishlist {
+            text-align: center;
+            padding: 100px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .empty-wishlist i {
+            font-size: 5rem;
+            color: #e5e7eb;
+            margin-bottom: 20px;
+        }
+        .empty-wishlist h2 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        .empty-wishlist .btn {
+            margin-top: 20px;
+        }
+        /* Reuse grid from index.css */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-open"></i> BookHaven
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#featured">Books</a>
+                <a href="profile.html">Profile</a>
+            </div>
+            <div class="nav-icons">
+                <a href="wishlist.html" title="Wishlist">
+                    <i class="fas fa-heart" style="color: #ef4444;"></i>
+                    <span class="wishlist-count" id="wishlist-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="wishlist-section">
+        <div class="wishlist-container">
+            <div class="wishlist-header">
+                <h1>My <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Wishlist</span></h1>
+                <p>Manage your favorite books and never lose track of what you want to read next.</p>
+            </div>
+
+            <div id="wishlist-grid" class="books-grid">
+                <!-- Wishlist items will be loaded here -->
+            </div>
+
+            <div id="empty-state" class="empty-wishlist" style="display: none;">
+                <i class="far fa-heart"></i>
+                <h2>Your wishlist is empty</h2>
+                <p>Explore our collection and click the heart icon to save books here!</p>
+                <a href="index.html#featured" class="btn btn-primary">Start Exploring</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Quick View -->
+    <div class="modal" id="bookModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+
+    <script src="js/index.js" defer></script> <!-- For shareable functions -->
+    <script src="js/wishlist.js" defer></script>
+</body>
+</html>
